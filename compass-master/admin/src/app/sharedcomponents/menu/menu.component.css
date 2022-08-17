@@ -1,0 +1,77 @@
+.toolbar {
+    width: 100%;
+    height: 54px;
+    background-color: #3131f4;
+    position: fixed;
+    top: 0;
+    margin-left: -10px;
+    z-index: 1;
+}
+.logo {
+    background-image: url("../../../assets/logo.png");
+    height: 52px;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 111px;
+    background-size: contain;
+    margin-left: 16px;
+}
+.addnew {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 87px;
+    height: 30px;
+    background-color: white;
+    color: black;
+    font-weight: 400;
+    border-radius: 7px;
+    border: none !important;
+    outline: none !important;
+    cursor: pointer;
+}
+
+.assesment {
+    position: absolute;
+    right: 105px;
+    top: 10px;
+    width: 87px;
+    height: 30px;
+    background-color: white;
+    color: black;
+    font-weight: 400;
+    border-radius: 7px;
+    border: none !important;
+    outline: none !important;
+    cursor: pointer;
+}
+
+.contents {
+    position: absolute;
+    right: 295px;
+    top: 10px;
+    width: 87px;
+    height: 30px;
+    background-color: white;
+    color: black;
+    font-weight: 400;
+    border-radius: 7px;
+    border: none !important;
+    outline: none !important;
+    cursor: pointer;
+}
+
+.categories {
+    position: absolute;
+    right: 200px;
+    top: 10px;
+    width: 87px;
+    height: 30px;
+    background-color: white;
+    color: black;
+    font-weight: 400;
+    border-radius: 7px;
+    border: none !important;
+    outline: none !important;
+    cursor: pointer;
+}

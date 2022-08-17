@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "Compass",
+    "slug": "compass",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "app.compassapp.io",
+      "config": {
+        "googleSignIn": {
+          "reversedClientId": "com.googleusercontent.apps.638444093691-7a6s1ljlba8g7nv0b5jme7kk1p08h221"
+        }
+      },
+      "usesAppleSignIn": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "app.compassapp.io"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

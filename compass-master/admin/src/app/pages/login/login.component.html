@@ -1,0 +1,39 @@
+<div class="backgroudImg"></div>
+<form [formGroup]="signIn">
+  <div class="inputfeilds">
+    <input class="emailInput inputFocus" type="email" placeholder="Email" formControlName="email">
+    <ng-container>
+      <div class="warning" *ngIf="signIn.get('email').hasError('required') && isFormSubmitted ">
+        Email is required.
+      </div>
+    </ng-container>
+    <input class="passwordInput inputFocus" type="password" placeholder="Password" formControlName="password">
+    <ng-container>
+      <div class="warning" *ngIf="signIn.get('password').hasError('required') && isFormSubmitted ">
+        Password is required.
+      </div>
+    </ng-container>
+  </div>
+</form>
+<ng-container>
+  <div class="warning" *ngIf="isIncorrect">
+    Please check your email or password.
+  </div>
+</ng-container>
+<div class="btndiv">
+<!-- <button class="loginBtn" (click)="submit()">LogIn</button> -->
+<dx-button
+        id="button"
+        [height]="40"
+        [width]="180"
+        class="loginBtn"
+        [disabled]="isDisabled"
+        (onClick)="submit()">
+        <div *dxTemplate="let data of 'content'">
+            <dx-load-indicator class='button-indicator'
+                [visible]="loadIndicatorVisible">
+            </dx-load-indicator>
+            <span class='dx-button-text'>{{buttonText}}</span>
+        </div>
+    </dx-button>
+</div>

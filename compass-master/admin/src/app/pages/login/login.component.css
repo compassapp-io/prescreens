@@ -1,0 +1,67 @@
+.backgroudImg {
+    background-image: url("../../../assets/back1.png");
+    height: 200px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.inputfeilds {
+    display: grid;
+}
+.emailInput {
+    width: 22%;
+    margin: auto;
+    height: 32px;
+    border: 2px solid #a6c4ff;
+    border-radius: 10px;
+    background-color: white !important;
+    /* padding: 2px; */
+    padding-left: 15px;
+}
+.passwordInput {
+    width: 22%;
+    margin: auto;
+    height: 32px;
+    border: 2px solid #a6c4ff;
+    border-radius: 10px;
+    background-color: white !important;
+    padding-left: 15px;
+    margin-top: 12px;
+}
+.loginBtn {
+    background-color: #3131f4;
+    margin: auto;
+    color: white;
+    box-shadow: 0px 4px 4px rgba(131, 130, 130, 0.25);
+    border-radius: 22px;
+    border: none !important;
+    cursor: pointer;
+}
+.btndiv {
+    text-align: center;
+    margin-top: 10px;
+}
+.inputFocus:focus {
+    border: 2px solid #a6c4ff;
+    box-shadow: 0px 2px 5px 1px #a6c4ff;
+    outline: none !important;
+}
+.warning {
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+    color: red;
+}
+::ng-deep #button .button-indicator {
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-bottom: -3px;
+    margin-top: -5px;
+    color: white !important;
+}
+
+::ng-deep #button .dx-loadindicator-icon {
+    mix-blend-mode: screen !important;
+}

@@ -1,0 +1,108 @@
+<app-menu></app-menu>
+<div class="top">
+  <dx-data-grid (onEditorPreparing)="editorPreparing($event)" (onEditCanceled)="onEditCanceled($event)" keyExpr="id"
+    [dataSource]="newdata" [showBorders]="true" [filterRow]="{ visible: true }" [allowColumnResizing]="true"
+    columnResizingMode="widget">
+    <dxo-paging [pageSize]="7"></dxo-paging>
+    <dxo-editing mode="popup" [allowAdding]="true" [allowDeleting]="true" [allowUpdating]="true" [(changes)]="changes"
+      [(editRowKey)]="editRowKey" [useIcons]="true">
+      <dxo-popup title="Content" [showTitle]="true" [width]="700" [height]="600"
+        [position]="{ my: 'top', at: 'top', of: 'window' }">
+      </dxo-popup>
+    </dxo-editing>
+    <dxi-column dataField="title">
+      <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column dataField="description" editCellTemplate="desc" cellTemplate="cellTemplateforDesc">
+    </dxi-column>
+    <dxi-column dataField="parentid" caption="Parent Category">
+      <dxo-lookup [dataSource]="parentCategory" displayExpr="title" valueExpr="id">
+      </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="media[0]" caption="Media Data" [width]="150" editCellTemplate="mediaedit"
+      cellTemplate="cellTemplate">
+    </dxi-column>
+    <dxi-column dataField="displayorder" caption="Display Order" editCellTemplate="displayOrder">
+    </dxi-column>
+    <div *dxTemplate="let data of 'displayOrder'">
+      <dx-number-box [value]="data.value" [min]="0" [max]="100" [showSpinButtons]="true"
+        (onValueChanged)="orderDisplayChanged($event, data)">
+      </dx-number-box>
+    </div>
+    <div *dxTemplate="let data of 'cellTemplate'">
+      <img *ngIf="data.value && data.value.type === 'audio'" style="height: 60px; border-radius: 8px;"
+        [src]="data.value.meta.artwork" />
+      <img *ngIf="data.value && data.value.type === 'article'" style="height: 60px; border-radius: 8px;width: 100px;"
+        [src]="data.value.name" />
+    </div>
+    <div *dxTemplate="let data of 'cellTemplateforDesc'">
+      <div [innerHTML]="data.value"></div>
+    </div>
+    <div *dxTemplate="let md of 'mediaedit'">
+      <dx-drop-down-box placeholder="Media Content" [showClearButton]="true" (onClosed)="mediaUpdate(md)">
+        <dxo-drop-down-options title="Add Media Content" [showTitle]="true" [fullScreen]="true"
+          [showCloseButton]="true">
+        </dxo-drop-down-options>
+        <div id="data-grid-mp">
+          <dx-data-grid [dataSource]="mediaConent" id="gridContainer1" keyExpr="id" [showBorders]="true"
+            [filterRow]="{ visible: true }" [scrolling]="{ mode: 'infinite' }">
+            <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+            </dxo-editing>
+            <dxi-column dataField="description" caption="Description">
+              <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="name" caption="Name">
+              <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="type" caption="Type">
+              <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="meta.artist" caption="Artist">
+              <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="meta.artwork" caption="Image">
+              <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-column>
+          </dx-data-grid>
+        </div>
+      </dx-drop-down-box>
+    </div>
+    <div *dxTemplate="let ds of 'desc'">
+      <dx-drop-down-box placeholder="Add Description" [showClearButton]="true" (onClosed)="mediaDescription(ds)">
+        <dxo-drop-down-options title="Add Description" [showTitle]="true" [fullScreen]="true" [showCloseButton]="true">
+        </dxo-drop-down-options>
+        <div id="data-grid-mp">
+          <dx-html-editor [height]="300" [(valueType)]="editorValueType" (valueChange)="valueChange($event)">
+            <dxo-toolbar>
+              <dxi-item formatName="undo"></dxi-item>
+              <dxi-item formatName="redo"></dxi-item>
+              <dxi-item formatName="separator"></dxi-item>
+              <dxi-item formatName="size" [formatValues]="['8pt', '10pt', '12pt', '14pt', '18pt', '24pt', '36pt']">
+              </dxi-item>
+              <dxi-item formatName="font"
+                [formatValues]="['Arial', 'Courier New', 'Georgia', 'Impact', 'Lucida Console', 'Tahoma', 'Times New Roman', 'Verdana']">
+              </dxi-item>
+              <dxi-item formatName="separator"></dxi-item>
+              <dxi-item formatName="bold"></dxi-item>
+              <dxi-item formatName="italic"></dxi-item>
+              <dxi-item formatName="strike"></dxi-item>
+              <dxi-item formatName="underline"></dxi-item>
+              <dxi-item formatName="separator"></dxi-item>
+              <dxi-item formatName="alignLeft"></dxi-item>
+              <dxi-item formatName="alignCenter"></dxi-item>
+              <dxi-item formatName="alignRight"></dxi-item>
+              <dxi-item formatName="alignJustify"></dxi-item>
+              <dxi-item formatName="separator"></dxi-item>
+              <dxi-item formatName="color"></dxi-item>
+              <dxi-item formatName="background"></dxi-item>
+            </dxo-toolbar>
+            <div [innerHTML]="descriptionValue"></div>
+          </dx-html-editor>
+        </div>
+      </dx-drop-down-box>
+    </div>
+    <dxo-search-panel [visible]="true"></dxo-search-panel>
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+  </dx-data-grid>
+</div>
+<dx-toast [(visible)]="isVisible" [type]="type" [message]="message"></dx-toast>

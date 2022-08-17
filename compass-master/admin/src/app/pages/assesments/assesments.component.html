@@ -1,0 +1,48 @@
+<app-menu></app-menu>
+<dx-data-grid style="margin-top: 68px;" (onEditorPreparing)="editorPreparing($event)" keyExpr="id"
+    [dataSource]="newdata" [showBorders]="true" [repaintChangesOnly]="true" [filterRow]="{ visible: true }"
+    [allowColumnResizing]="true" columnResizingMode="widget">
+    <dxo-editing mode="popup" [allowAdding]="true" [allowDeleting]="true" [allowUpdating]="true"
+        [(editRowKey)]="editRowKey" [useIcons]="true">
+        <dxo-popup title="Assessments" [showTitle]="true" [width]="700" [height]="600"
+            [position]="{ my: 'top', at: 'top', of: 'window' }">
+        </dxo-popup>
+    </dxo-editing>
+
+    <dxi-column dataField="description">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column dataField="type" [allowEditing]="false">
+    </dxi-column>
+    <dxi-column dataField="meta.options" caption="Option values" cellTemplate="cellTemplate"
+        editCellTemplate="mediaedit">
+        <div *dxTemplate="let data of 'cellTemplate'; let i = index">
+            <dx-drop-down-button style="width: 100%;" text="Option List" [items]="data.value" displayExpr="value"
+                keyExpr="id" [dropDownOptions]="{ width: '100%' }">
+            </dx-drop-down-button>
+        </div>
+    </dxi-column>
+    <dxi-column dataField="meta.active" caption="Status">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+
+    <div *dxTemplate="let md of 'mediaedit'">
+        <dx-drop-down-box placeholder="Options" [showClearButton]="true" (onClosed)="mediaDescription(md)">
+            <dxo-drop-down-options title="Add Options" [showTitle]="true" [fullScreen]="true" [showCloseButton]="true">
+            </dxo-drop-down-options>
+
+            <div id="data-grid-mp">
+                <dx-data-grid [dataSource]="optionContent" id="gridContainer1" keyExpr="id" [showBorders]="true"
+                    [filterRow]="{ visible: true }" [scrolling]="{ mode: 'infinite' }">
+                    <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+                    </dxo-editing>
+                    <dxi-column dataField="value" caption="Options">
+                    </dxi-column>
+                </dx-data-grid>
+            </div>
+        </dx-drop-down-box>
+    </div>
+    <dxo-search-panel [visible]="true"></dxo-search-panel>
+    <dxo-group-panel [visible]="true"></dxo-group-panel>
+</dx-data-grid>
+<dx-toast [(visible)]="isVisible" [type]="type" [message]="message">
